@@ -11,7 +11,7 @@ typedef struct Snake_s {
 void create_snake();
 void draw_snake();
 char update_snake(u_int food[2]);
-void add_snake();
+void add_snake(u_int x, u_int y, Snake* last);
 
 extern u_char direction;
 #endif

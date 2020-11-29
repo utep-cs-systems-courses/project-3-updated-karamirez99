@@ -87,12 +87,16 @@ char update_snake(u_int food[2]){
 
   char collision = check_collision(food);
   if (collision == 2)
-    add_snake();
+    add_snake(oldX, oldY, last);
   
   return collision;
 }
 
-void add_snake(){
-  drawPixel(20,20, COLOR_RED);
+void add_snake(u_int x, u_int y, Snake* last){
+  Snake* newSnake = malloc(sizeof(Snake));
+  newSnake->position[0] = x;
+  newSnake->position[1] = y;
+  newSnake->next = NULL;
+  last->next = newSnake;
 }
 
