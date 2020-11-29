@@ -3,5 +3,6 @@
 
 void game_init();
 void update_game();
-
+void draw_food();
+void newFood();
 #endif

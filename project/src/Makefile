@@ -1,13 +1,13 @@
 COMMON_OBJECTS =
 CPU	       = msp430g2553
-CFLAGS	       = -mmcu=${CPU} -I../h
-LDFLAGS	       = -L/opt/ti/msp430_gcc/include
+CFLAGS	       = -mmcu=${CPU} -I../../h
+LDFLAGS	       = -L../../lib -L/opt/ti/msp430_gcc/include
 CC	       = msp430-elf-gcc
 AS 	       = msp430-elf-as
 
 all: lab3.elf
 
-lab3.elf: ${COMMON_OBJECTS} buzzer.o wdInterruptHandler.o led.o switches.o p2_interrupt_handler.o
+lab3.elf: ${COMMON_OBJECTS} main.o buzzer.o wdInterruptHandler.o led.o switches.o p2_interrupt_handler.o game.o snake.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd -lShape -lCircle
 
 load: lab3.elf
@@ -18,7 +18,9 @@ clean:
 
 
 
-buzzer.c: buzzer.h
+buzzer.o: buzzer.h
 #InterruptHandler.o: song.h stateMachine.h buzzer.h
-led.c: led.h
+led.o: led.h
 switches.o: switches.h
+snake.o: snake.h
+game.o: game.h snake.h

@@ -1,6 +1,6 @@
 #include <msp430.h>
 #include "switches.h"
-//#include "led.h"
+#include "snake.h"
 //#include "buzzer.h"
 //#include "song.h"
 
@@ -31,22 +31,23 @@ void switch_interrupt_handler()
   //Move Left
 
   if (!(p2Val & SW1)) {
- 
+    direction = 2;
   }
 
   //Move Down
 
-  if (!(p2Val & SW2)) {
-
+  else if (!(p2Val & SW2)) {
+    direction = 1;
   }
 
-  //Move Right
+  //Move Up
 
-  if (!(p2Val & SW3)) {
-
+  else if (!(p2Val & SW3)) {
+    direction = 3;
   }
   
-  //Move down
-  if (!(p2Val & SW4)) {
-
+  //Move Right
+  else if (!(p2Val & SW4)) {
+    direction = 0;
   }
+}

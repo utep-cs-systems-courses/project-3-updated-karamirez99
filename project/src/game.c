@@ -1,4 +1,5 @@
 #include "snake.h"
+#include "game.h"
 #include <lcdutils.h>
 #include <lcddraw.h>
 #include <stdlib.h>
@@ -9,9 +10,10 @@ void game_init()
 {
   create_snake();
   draw_snake();
-  u_int x = (rand() % 17) * 8 , y = (rand() % 17) * 8;
+  u_int x = (rand() % 16) * 8 , y = (rand() % 16) * 8;
   food[0] = x;
   food[1] = y;
+  draw_food();
 }
 
 void draw_food(){
@@ -21,8 +23,8 @@ void draw_food(){
 }
 
 void newFood(){
-  u_int x = (rand() % 17) * 8;
-  u_int y = (rand() % 17) * 8;
+  u_int x = (rand() % 16) * 8;
+  u_int y = (rand() % 16) * 8;
   food[0] = x;
   food[1] = y;
 }
@@ -30,7 +32,9 @@ void newFood(){
 void update_game()
 {
   clearScreen(COLOR_BLACK);
-  update_snake(food);
+  char impact = update_snake(food);
+  if (impact == 2)
+    newFood();
   draw_food();
   draw_snake();
 }
