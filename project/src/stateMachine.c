@@ -2,9 +2,10 @@
 #include "stateMachine.h"
 #include "led.h"
 
-static char on_ratio = 1;
+char on_ratio = 1;
 static char brightnessChange = 0;
 
+/*
 char toggle_red(char value)
 {
   if (on_ratio == 0) {        //on_ratio of 0 is just the led off
@@ -24,7 +25,7 @@ char toggle_red(char value)
 
   return 0;
 }
-
+*/
 void show_redLED() {
   static char brightness_state = 0;
   char changed = 0;
@@ -35,6 +36,7 @@ void show_redLED() {
   led_update();
 }
 
+/*
 void light_advance() {
   static char state = 0;
 
@@ -57,3 +59,4 @@ void light_advance() {
     break;
   }
 }
+*/
