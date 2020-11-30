@@ -1,9 +1,12 @@
 #include "snake.h"
 #include "game.h"
+#include "buzzer.h" 
+//#include "stateMachine.h"
 #include <lcdutils.h>
 #include <lcddraw.h>
 #include <stdlib.h>
 #include <msp430.h>
+
 
 static u_int food[2];
 char gameOver = 0;
@@ -33,11 +36,16 @@ void newFood(){
 
 void update_game()
 {
+  stop_note();
   
   clearScreen(COLOR_BLACK);
   char impact = update_snake(food);
-  if (impact == 2)
+  if (impact == 2){
     newFood();
+    // drawPixel(75, 75, COLOR_WHITE);
+    // light_advance();
+    play_next_note();
+  }
   draw_food();
   draw_snake();
 
@@ -46,9 +54,7 @@ void update_game()
 }
 
 void end_game(){
-  drawPixel(30, 30, COLOR_WHITE);
-  
-  drawString5x7(50, 50, "RIP", COLOR_YELLOW, COLOR_BLACK);  //replace with the other font later
+  drawString8x12(50, 50, "RIP", COLOR_YELLOW, COLOR_BLACK);  //replace with the other font later
 
   // ANd
   //And then just disable everything here lul

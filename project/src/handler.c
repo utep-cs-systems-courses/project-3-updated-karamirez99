@@ -1,5 +1,5 @@
 #include <msp430.h>
-//#include "stateMachine.h"
+#include "stateMachine.h"
 #include "game.h"
 #include "led.h"
 
@@ -20,10 +20,10 @@ void wdt_c_handler(){
     or_sr(0x10);
   }
   
-  if (++timeAdvance == 20) {
+  if (!updateGame && ++timeAdvance == 100) {
     updateGame = 1;
+    timeAdvance = 0;
   }
-  
    green_on = 0;
    led_changed = 1;
    led_update();

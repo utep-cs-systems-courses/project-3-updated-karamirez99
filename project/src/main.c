@@ -11,7 +11,7 @@ int main(void) {
   configureClocks();
   lcd_init();
   clearScreen(COLOR_BLACK);
-  //buzzer_init();
+  buzzer_init();
 
   led_init();
   switch_init();

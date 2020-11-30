@@ -7,7 +7,7 @@ AS 	       = msp430-elf-as -mmcu=${CPU} -c
 
 all: lab3.elf
 
-lab3.elf: ${COMMON_OBJECTS} main.o buzzer.o handler.o led.o switches.o p2_interrupt_handler.o game.o snake.o wdt_handler.o
+lab3.elf: ${COMMON_OBJECTS} main.o buzzer.o handler.o led.o switches.o p2_interrupt_handler.o game.o snake.o wdt_handler.o stateMachine.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd -lShape -lCircle
 
 load: lab3.elf
@@ -24,3 +24,5 @@ led.o: led.h
 switches.o: switches.h
 snake.o: snake.h
 game.o: game.h snake.h
+stateMachine.o: stateMachine.h led.h
+handler.o: stateMachine.h led.h

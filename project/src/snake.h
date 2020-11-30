@@ -5,7 +5,7 @@
 
 typedef struct Snake_s {
   struct Snake_s *next;
-  u_int position[2];
+  u_char position[2];
 } Snake;
 
 void create_snake();

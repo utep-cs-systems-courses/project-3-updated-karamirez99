@@ -11,7 +11,7 @@ u_char direction = 0;
 void create_snake()
 {
   head = malloc(sizeof(Snake));
-  u_int x = 0, y = 0;
+  u_char x = 0, y = 0;
   head->position[0] = x;
   head->position[1] = y;
   head->next = NULL;
@@ -22,7 +22,7 @@ void draw_snake()
   Snake *currNode = head;
   
   while(currNode != NULL){
-    u_int x = currNode->position[0], y = currNode->position[1];
+    u_char x = currNode->position[0], y = currNode->position[1];
     fillRectangle(x, y, 8, 8, COLOR_BLUE);
     currNode = currNode->next;
   }
@@ -50,9 +50,9 @@ char check_collision(u_int food[2]){
 }
 
 char update_snake(u_int food[2]){
-  u_int *position = head->position;
-  u_int oldX = head->position[0];
-  u_int oldY = head->position[1];
+  u_char *position = head->position;
+  u_char oldX = head->position[0];
+  u_char oldY = head->position[1];
 
   and_sr(~0x8);
   switch (direction){
