@@ -19,6 +19,7 @@ void game_init()
   food[0] = x;
   food[1] = y;
   draw_food();
+  drawDiamond(screenWidth / 2, screenHeight / 2 + 40, 7, COLOR_YELLOW);
 }
 
 void draw_food(){
@@ -55,7 +56,8 @@ void update_game()
 
 void end_game(){
   drawString8x12(50, 50, "RIP", COLOR_YELLOW, COLOR_BLACK);  //replace with the other font later
-
+  drawDiamond(screenWidth / 2, screenHeight / 2 + 20, 14, COLOR_WHITE);
+  drawDiamond(screenWidth / 2, screenHeight / 2 + 27, 7, COLOR_YELLOW);
   // ANd
   //And then just disable everything here lul
 }
