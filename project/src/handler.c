@@ -6,23 +6,30 @@
 //void __interrupt_vec(WDT_VECTOR) WDT(){
 void wdt_c_handler(){
   static unsigned char timeAdvance = 0;
-   green_on = 1;
-    led_changed = 1;
-    led_update();
+  static unsigned char redLEDTime = 0;
+  static unsigned char led_enabled = 0;
   
-  if (gameOver){
+  green_on = 1;
+  led_changed = 1;
+  led_update();
+  
+  if (gameOver && !led_enabled){
     end_game();
-    green_on = 0;
-    led_changed = 1;
-    led_update();
-    
-    and_sr(~0x8);
-    or_sr(0x10);
+    led_enabled = 1;
   }
   
-  if (!updateGame && ++timeAdvance == 100) {
+  if (!updateGame && !gameOver && ++timeAdvance == 100) {
     updateGame = 1;
     timeAdvance = 0;
+  }
+  
+  if(led_enabled){
+    show_redLED();
+    if(redLEDTime++ == 250){
+      light_advance();
+      redLEDTime = 0;
+    }
+    
   }
    green_on = 0;
    led_changed = 1;
