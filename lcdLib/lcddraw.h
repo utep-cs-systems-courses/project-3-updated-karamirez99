@@ -29,6 +29,8 @@ void fillRectangle(u_char colMin, u_char rowMin, u_char width, u_char height, u_
  */
 void clearScreen(u_int colorBGR);
 
+void drawDiamond(u_char colLoc, u_char rowLoc, u_char size, u_int colorBGR);
+
 /** Draw string at col,row
  *  Type:
  *  FONT_SM - small (5x8,) FONT_MD - medium (8x12,) FONT_LG - large (11x16)

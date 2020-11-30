@@ -177,3 +177,15 @@ void drawRectOutline(u_char colMin, u_char rowMin, u_char width, u_char height,
   fillRectangle(colMin + width, rowMin, 1, height, colorBGR);
 }
 
+void drawDiamond(u_char colLoc, u_char rowLoc, u_char size, u_int colorBGR)
+{
+  for(u_char col = 0; col < size; col++){
+    for(u_char row = size; row > col; row--){
+      drawPixel(col+colLoc, row+ rowLoc, colorBGR);
+      drawPixel(colLoc - col,row +rowLoc, colorBGR);
+      drawPixel(row - col + colLoc, col + rowLoc + size, colorBGR);
+      drawPixel(colLoc + row - size, col + rowLoc + size, colorBGR);
+    }
+    
+  }
+}
