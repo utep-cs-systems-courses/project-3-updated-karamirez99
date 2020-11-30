@@ -13,11 +13,25 @@ int main(void) {
   clearScreen(COLOR_BLACK);
   //buzzer_init();
 
-  //led_init();
-
+  led_init();
   switch_init();
   game_init();
   
   enableWDTInterrupts();
-  or_sr(0x18);
+  or_sr(0x08);
+  
+  while(1){
+    green_on = 0;
+    led_changed = 1;
+    led_update();
+    or_sr(0x10);
+
+    green_on = 1;
+    led_changed = 1;
+    led_update();    
+    if(updateGame){
+      update_game();
+      updateGame = 0;
+    }
+  }
 }

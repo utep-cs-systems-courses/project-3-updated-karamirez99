@@ -16,16 +16,16 @@ void led_init()
 
 void led_update()
 {
-  if (led_changed && led_enabled) {
+  if (led_changed) {
     char ledFlags = redVal[red_on] | greenVal[green_on];
 
     P1OUT &= (0xff^LEDS) | ledFlags;
     P1OUT |= ledFlags;
     led_changed = 0;
-
-  } else if(!led_enabled){
-    char ledFlags = 0;
-    P1OUT &= (0xFF^LEDS) | ledFlags;
-    P1OUT |= ledFlags;
   }
+    // } else if(!led_enabled){
+    // char ledFlags = 0;
+    // P1OUT &= (0xFF^LEDS) | ledFlags;
+    // P1OUT |= ledFlags;
+    // }
 }

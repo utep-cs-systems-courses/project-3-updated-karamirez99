@@ -1,5 +1,6 @@
 #include <lcdutils.h>
 #include <lcddraw.h>
+#include <msp430.h>
 #include <shape.h>
 #include <stdlib.h>
 #include "snake.h"
@@ -52,7 +53,8 @@ char update_snake(u_int food[2]){
   u_int *position = head->position;
   u_int oldX = head->position[0];
   u_int oldY = head->position[1];
-  
+
+  and_sr(~0x8);
   switch (direction){
   case 0:
     position[0] += 8;
@@ -88,7 +90,8 @@ char update_snake(u_int food[2]){
   char collision = check_collision(food);
   if (collision == 2)
     add_snake(oldX, oldY, last);
-  
+
+  or_sr(0x8);
   return collision;
 }
 
