@@ -19,13 +19,15 @@ int main(void) {
   
   enableWDTInterrupts();
   or_sr(0x08);
-  
+
   while(1){
+    //CPU OFF
     green_on = 0;
     led_changed = 1;
     led_update();
     or_sr(0x10);
 
+    //CPU ON
     green_on = 1;
     led_changed = 1;
     led_update();    

@@ -1,8 +1,6 @@
 #include <msp430.h>
 #include "switches.h"
 #include "snake.h"
-//#include "buzzer.h"
-//#include "song.h"
 
 char switch_state_down, switch_state_changed;
 
@@ -21,7 +19,6 @@ void switch_init()
   P2OUT |= SWITCHES;
   P2DIR &= ~SWITCHES;
   switch_update_interrupt_sense();
-  //led_update();
 }
 
 void switch_interrupt_handler()

@@ -1,12 +1,8 @@
 #include "snake.h"
 #include "game.h"
 #include "buzzer.h" 
-//#include "stateMachine.h"
 #include <lcdutils.h>
 #include <lcddraw.h>
-#include <stdlib.h>
-#include <msp430.h>
-
 
 static u_int food[2];
 char gameOver = 0;
@@ -15,11 +11,10 @@ void game_init()
 {
   create_snake();
   draw_snake();
-  u_int x = (rand() % 16) * 8 , y = (rand() % 16) * 8;
+  u_int x = get_randomNum(), y = get_randomNum();
   food[0] = x;
   food[1] = y;
   draw_food();
-  drawDiamond(screenWidth / 2, screenHeight / 2 + 40, 7, COLOR_YELLOW);
 }
 
 void draw_food(){
@@ -29,8 +24,8 @@ void draw_food(){
 }
 
 void newFood(){
-  u_int x = (rand() % 16) * 8;
-  u_int y = (rand() % 16) * 8;
+  u_int x = get_randomNum();
+  u_int y = get_randomNum();
   food[0] = x;
   food[1] = y;
 }
@@ -40,11 +35,9 @@ void update_game()
   stop_note();
   
   clearScreen(COLOR_BLACK);
-  char impact = update_snake(food);
+  char impact = update_snake(food);    //2 is food, 1 is self collision
   if (impact == 2){
     newFood();
-    // drawPixel(75, 75, COLOR_WHITE);
-    // light_advance();
     play_next_note();
   }
   draw_food();
@@ -54,10 +47,19 @@ void update_game()
     gameOver = 1;
 }
 
+u_int get_randomNum()
+{
+  static u_int pos = 0;
+  u_int random;
+
+  pos = ((pos * 5 + 3) % 17) % 16;   //16x16 board
+  random = pos * 8;
+  return random;
+}
+  
+
 void end_game(){
-  drawString8x12(50, 50, "RIP", COLOR_YELLOW, COLOR_BLACK);  //replace with the other font later
+  drawString8x12(50, 50, "RIP", COLOR_YELLOW, COLOR_BLACK);
   drawDiamond(screenWidth / 2, screenHeight / 2 + 20, 14, COLOR_WHITE);
   drawDiamond(screenWidth / 2, screenHeight / 2 + 27, 7, COLOR_YELLOW);
-  // ANd
-  //And then just disable everything here lul
 }

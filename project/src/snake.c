@@ -1,6 +1,6 @@
 #include <lcdutils.h>
 #include <lcddraw.h>
-#include <msp430.h>
+#include <libTimer.h>
 #include <shape.h>
 #include <stdlib.h>
 #include "snake.h"
@@ -33,7 +33,7 @@ char check_collision(u_int food[2]){
   u_int heady = head->position[1];
 
   Snake *current = head->next;
-  while (current != NULL){
+  while (current != NULL){  //check if head hits any location in list
     u_int currentX = current->position[0];
     u_int currentY = current->position[1];
 
@@ -43,6 +43,7 @@ char check_collision(u_int food[2]){
     current = current->next;
   }
 
+  //if the head position is at the food loc
   if((headx == food[0]) && (heady == food[1]))
     return 2;
 
@@ -54,13 +55,12 @@ char update_snake(u_int food[2]){
   u_char oldX = head->position[0];
   u_char oldY = head->position[1];
 
-  and_sr(~0x8);
-  switch (direction){
-  case 0:
+  switch (direction){  //0-right, 1-down, 2-left, 3 up
+  case 0:               
     position[0] += 8;
     position[0] %= screenWidth;
     break;
-  case 1:
+  case 1:              
     position[1] += 8;
     position[1] %= screenHeight;
     break;
@@ -74,7 +74,7 @@ char update_snake(u_int food[2]){
 
   Snake *current = head->next;
   Snake *last = head;
-  while(current != NULL){
+  while(current != NULL){  //copy each position into the next node
     u_int tempX = current->position[0];
     u_int tempY = current->position[1];
 
@@ -91,10 +91,10 @@ char update_snake(u_int food[2]){
   if (collision == 2)
     add_snake(oldX, oldY, last);
 
-  or_sr(0x8);
   return collision;
 }
 
+// add a new snake at the end of the list
 void add_snake(u_int x, u_int y, Snake* last){
   Snake* newSnake = malloc(sizeof(Snake));
   newSnake->position[0] = x;
