@@ -3,9 +3,9 @@
 #include "led.h"
 
 char on_ratio = 1;
-static char brightnessChange = 0;
+//static char brightnessChange = 0;
 
-/*
+/* In lightAdvance.s
 char toggle_red(char value)
 {
   if (on_ratio == 0) {        //on_ratio of 0 is just the led off
@@ -26,17 +26,22 @@ char toggle_red(char value)
   return 0;
 }
 */
+
+ /*
 void show_redLED() {
   static char brightness_state = 0;
   char changed = 0;
   
   changed = toggle_red(brightness_state);
-  led_changed |= changed;
+  // led_changed |= changed;
+  show_redLED_s2(changed);
   brightness_state = (brightness_state == 4) ? 1 : brightness_state + 1;
-  led_update();
+  // led_update();
+  show_redLED_s();
 }
+*/
 
-/*
+/* In lightAdvance.s
 void light_advance() {
   static char state = 0;
 

@@ -6,4 +6,5 @@ void light_advance();
 char toggle_red(char value);
 
 extern char on_ratio;
+
 #endif
