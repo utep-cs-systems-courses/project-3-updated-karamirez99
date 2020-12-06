@@ -1,6 +1,8 @@
 #ifndef game_included
 #define game_included
 
+#include <shape.h>
+
 void game_init();
 void update_game();
 void draw_food();
